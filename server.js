@@ -3,6 +3,7 @@ const log = require("debug")("holidays:server");
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const cors = require("cors");
 
 const PORT = process.env.PORT ?? 3000;
 const app = express();
@@ -14,6 +15,8 @@ mongoose.connection.once("open", () => {
 });
 
 app.use(morgan("dev"));
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send({ msg: "Holidays" });
